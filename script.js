@@ -1,14 +1,18 @@
-/* Dark mode */
-body.dark-mode {
-    background-color: #181818;
-    color: #ddd;
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+
+    // Save the current mode to localStorage
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
 }
 
-body.dark-mode section {
-    background-color: rgba(40, 40, 40, 0.9);
-}
-
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
+// Check for saved user preference on page load
+document.addEventListener("DOMContentLoaded", () => {
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+});
